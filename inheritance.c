@@ -96,22 +96,6 @@ void free_family(person *p)
     // TODO: Free parents recursively
     free_family(p->parents[0]);
     free_family(p->parents[1]);
-    // person *tmp0 = p;
-    // person *tmp1 = p->parents[0];
-    // p = tmp1;
-    // free(p);
-    // person *tmp2 = p->parents[1];
-    // p = tmp2;
-    // free(p);
-    // p = tmp0;
-    // printf("feiofwj");
-   
-    // printf("Err0-r");
-    //Here'es what I attempted to do. What I think goes wrong here is it eventually calls for a parent that doesn't exist and that shuts it down with the if statement. 
-    
-
-    // TODO: Free child
-
     free(p);
     return;
     }

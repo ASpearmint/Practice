@@ -39,9 +39,7 @@ int main(int argc, char *argv[]) {//if you use sprintf, do sizeof"string"+1 for 
             printf("File could not be written to");
             return 1;
         }
-    //HOW CAN I CHECK THE FIRST 3 BYTES TO CHECK IF IT'S A NEW JPEG? -> store to array with known value of elements
-    //WHAT'S THE DIFFERENCE BETWEEN AN ARRAY AND A POINTER, CAN A POINTER BE ITERABLE -> pointers are not iterable (technically), pointers point to things that are iterable, and arrays can store objects
-
+    
 
     //func to change output name
     
@@ -75,7 +73,7 @@ int main(int argc, char *argv[]) {//if you use sprintf, do sizeof"string"+1 for 
 
     }
     
-//close file and free my neighbour pookie
+//close file
 fclose(inptr);
 free(buffer);
 }
