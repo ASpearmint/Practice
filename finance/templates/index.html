@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    INDEX
+{% endblock %}
+
+{% block main %}
+    <div class="mt-5">
+        <h2> INDEX </h2>
+        <table class="centered">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Stock Value</th>
+                    <th>Available Cash</th>
+                    <th>Grand total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, value in transactions %}
+                <tr>
+                    <td>{{key}}</td>
+                    <td>{{value}}</td>
+                    <td>{{prices[key]}}</td>
+                    <td>{{prices[key]*value}}</td>
+                    <td>{{cash}}</td>
+                    <td>{{cash + prices[key]*value}}</td>
+                {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}
