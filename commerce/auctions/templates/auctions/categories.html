@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    
+    {% for item in content %}
+        <div>
+            <h3>{{item.name}}</h3> 
+                <p id="price" name="price">Price: {{item.price}}</p>
+                <a href="category/{{item.category}}">Category: {{item.category}}</a>
+                Description: {{item.desc}}
+        </div>
+        <div>
+            Photo: <img src="{{item.photo}}"></image> 
+            <button id="{{item.name}}" class="dark_blue" action="addwatch/{{item.name}}"> Add to Watchlist </button>          
+        </div>
+        <hr>
+        <script>
+        
+            $("#{{item.name}}").on("click", function(){
+               $(this).toggleClass('dark_blue');
+   
+           });
+       </script>
+        
+    {% endfor %} 
+   
+{% endblock %}

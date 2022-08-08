@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>How many licks does it take to get to the center of a tootsie pop?</h3>
+                <!-- TODO: Add multiple choice question here -->
+                <button id = "btn0" > 5 </button>
+                <button id = "btn1" > 82 </button>
+                <button id = "btn2" > 7 Million </button>
+                <button id = "btn3" > Don't bother </button>
+                <button id = "btn4" > The world may never know </button>
+            </div>
+            <script>
+                // TODO: Add code to check answers to questions
+
+
+                btn0.addEventListener("click", function() {
+                    btn0.style.backgroundColor = 'red';
+
+                    document.getElementById("p3").removeAttribute("hidden");
+
+                });
+                btn1.addEventListener("click", function() {
+                    btn1.style.backgroundColor = 'red';
+                    document.getElementById("p3").removeAttribute("hidden");
+                });
+
+                btn2.addEventListener("click", function() {
+                    btn2.style.backgroundColor = 'red';
+                    document.getElementById("p3").removeAttribute("hidden");
+                });
+
+                btn3.addEventListener("click", function() {
+                    btn3.style.backgroundColor = 'red';
+                    document.getElementById("p3").removeAttribute("hidden");
+                });
+
+                btn4.addEventListener("click", function() {
+                    btn4.style.backgroundColor = 'green';
+                    document.getElementById("p3").setAttribute("hidden", '');
+                    document.getElementById("p4").removeAttribute("hidden", '');
+
+                });
+
+
+
+            </script>
+             <div>
+                <p id = "p3" hidden>Incorrect</p>
+                <p id = "p4" hidden>Correct</p>
+            </div>
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3> How super are you today?</h3>
+                <!-- TODO: Add free response question here -->
+                <form action = "#" onsubmit = "func(); return false;">
+                    <input type ="text" id = "user" required> <input type="submit" value= "Submit">
+                </form>
+
+                <script>
+                        function func() {
+                            let input = document.getElementById("user").value;
+                            let text_box = document.getElementById("user");
+                            let p1 = document.getElementById("iwrong");
+                            let p2 = document.getElementById("icorrect");
+
+                            if (input == "super") {
+                                text_box.style.backgroundColor = 'green';
+                                p2.removeAttribute("hidden");
+
+
+                            }
+
+                            if (input != "super") {
+                                p1.removeAttribute("hidden")
+                            }
+
+                            e.preventDefault();
+
+
+                        }
+
+                </script>
+                <p id = "iwrong" hidden >Please give the correct answer</p>
+                <p id = "icorrect" hidden>Correct</p>
+            </div>
+        </div>
+    </body>
+</html>

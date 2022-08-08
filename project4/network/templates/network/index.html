@@ -1,0 +1,34 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <!-- Figure out title-->
+    <h1>All Posts</h1>
+    <!-- Always leave New post at top similar to twitter-->
+    <div id="new_post">
+        <form id="compose-form" onsubmit="return false;" method="POST">
+            {% csrf_token %}
+            <textarea class="form-control" id="body" name="body" placeholder="What's happening?"></textarea>
+            <button class="btn btn-primary" type="submit" id="submit-index">Submit</button>
+        </form>
+    </div>
+    <hr>
+
+    <div id="index_">
+    </div>
+
+<script>
+    var username = "{{user.username}}"
+</script> 
+
+{% block script %}
+<!-- In production change to JSX Preprocessor -->
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> 
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel" src="{% static 'network/index.js' %}"></script>
+
+
+
+{% endblock %}
+{% endblock %}  

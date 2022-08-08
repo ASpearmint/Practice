@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Page
+{% endblock %}
+
+{% block body %}
+<h1>Edit Page</h1>
+<form autocomplete="off" action="/edit_page" method="POST" id="form" name="form">
+    {% csrf_token %}
+    <input name="text" id="text" placeholder="Search for document">
+    <button id="btn0" form="text">Edit Page</button>
+</form>
+<div>
+    <li id="fill" hidden></li>
+</div>
+<script> 
+    let form = $("#form");
+    $("#btn0").on("click", () => {
+        form.submit();
+    });
+
+    $("#text").on("input", async function() {
+            let input = $("#text").val();
+            let response = await fetch('/search?q=' + input);
+            let items = await response.json();
+            if (items != null) {
+                $("#fill").attr("hidden", false)
+            }
+            items = items["items"];
+            let html = '';
+            for (let entry of items) {
+                html += '<li>' + entry + '</li>';
+            };
+            
+            $("#fill").html(html);
+            
+        });
+
+</script>
+{% endblock %}

@@ -1,0 +1,8 @@
+/*Used for Follow and Edit Page functions to hide text */
+.none {
+    display: none;
+}
+
+.block { 
+    display: block;
+}

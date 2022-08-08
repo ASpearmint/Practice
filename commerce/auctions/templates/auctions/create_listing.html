@@ -1,0 +1,45 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<form id="form" action="/create" method="POST" name="form" autocomplete="off">
+    {% csrf_token %}
+    <div class="space">
+        <label for="input1">Name of item</label>
+        <input id="input1" class="darky" type="text" name="a">
+    </div>
+
+   <div class="space">
+        <label for="input2">Starting bid</label>
+        <input id="input2" class="darky" type="number" name="b">
+    </div>
+
+    <div class="space">
+        <label for="input3">Image Url</label>
+        <input id="input3" class="darky" type="text" name="c">
+    </div>
+
+    <!--Should probably be a dropdown-->
+    <div class="space">
+        <label for="input4">Category</label>
+        <input id="input4" class="darky" type="text" name="d">
+    </div>
+    
+    <div class="space">
+        <label for="input5">Description</label>
+        <!-- Change to small text field -->
+        <input id="input5" class="darky" type="text" name="e">
+    </div>
+</form>
+<div>
+    <button class="dark_blue" id="search">Submit</button>
+</div>
+
+<script>     
+            $("#search").on("click", () => {
+                $("#form").submit();
+            });
+         
+</script>
+
+{% endblock %}

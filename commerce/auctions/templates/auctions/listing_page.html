@@ -1,0 +1,96 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    
+    {% for item in content %}
+        <div>
+            <h3>{{item.name}}</h3> 
+            <p id="price" name="price">Price: {{item.price}}</p>
+            <p><a href=" /category/{{item.category}}">Category: {{item.category}}</a></p>
+            Description: {{item.desc}}
+        </div>
+        <div>
+            <div>
+                <img src="{{item.photo}}"></img> 
+                <button class="dark_blue" id="btn2" ><a class="no_decoration" href="/addwatch/{{item.id}}"> Add to Watchlist </a></button>
+            </div>
+            
+            <div>
+                <form id="form0" name="form0" action="" method="POST" onsubmit="return false">
+                    {% csrf_token %}
+                    <input id="input0" name="input0" type="number">
+                    <button class="dark_blue" id="btn0">Bid</button>
+                </form>
+                <div id="insertion" hidden></div>
+            </div>
+            
+        </div>
+
+    
+    <hr>
+    <div>
+        <h3>Comments</h3>
+    </div>
+
+    <div class="space">
+        <form id="form1" name="form1" action='' onsubmit="return false" method="POST">
+            {% csrf_token %}
+            <label for="input1">Comment Here</label>
+            <!-- Change to small text field -->
+            <input id="input1" name="input1" class="darky" type="text" >
+            <button name="btn1" id="btn1" class="dark_blue"> Add Comment </button>
+        </form>
+    </div>
+
+    <div id="insert" hidden></div>
+
+    {% for item in comments %} 
+        <div>
+          <p>{{person}}: {{item.text}}</p> 
+            
+        </div>
+        {% empty %}
+        <div>
+            Noone's commented yet, be the first!
+        </div>
+    {% endfor %}
+        
+    <script>
+
+        //shouldnt work, equality strange here
+        $("#btn0").on("click", () => {       
+          response0 = $.post('/bid/{{item.id}}', $('#form0').serialize());
+          if (response0["response"] = true) {
+            func0();
+          }          
+        });
+
+        $("#btn1").on("click", () => {       
+          response1 = $.post('/comment/{{item.id}}', $('#form1').serialize());
+          if (response1["response"] = true) {
+            func1();
+          }
+        });
+
+        async function func0() {
+            $('#insertion').attr("hidden", false);
+            $('#insertion').html('<p> Bid for has been submitted </p>');
+        };
+
+        async function func1() {
+            
+            let input = $("#input1").val();
+            $("#insert").attr("hidden", false);
+            let html = '<div>' + 'Me: ' + input + '</div>';
+            $('#insert').html(html);
+            
+        };
+
+        $("#btn2").on("click", function(){
+            $(this).toggleClass('dark_blue');
+
+        });
+
+    </script>
+ {% endfor %}
+{% endblock %}

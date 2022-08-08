@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create Page
+{% endblock %}
+
+{% block body %}
+<h1>Create Page</h1>
+<form autocomplete="off" action="/create_page" method="POST" id="form" name="form">
+    {% csrf_token %}
+    <input name="text" id="text" placeholder="{{title}}">
+    <textarea name="textfield" id="textfield">
+        {{content}}
+    </textarea>
+    <button id="btn0" form="text">Create Page</button>
+</form>
+
+<script> 
+    let form = $("#form");
+    $("#btn0").on("click", () => {
+        form.submit();
+    });
+</script>
+{% endblock %}
+
+

@@ -1,0 +1,74 @@
+{% extends "network/layout.html" %} 
+{% load static %}
+
+{% block body %}
+<button id="profile">Profile</button>
+<button id="follow">Following</button>
+
+<div id="profile_">
+    <h3>{{bio.name}}</h3>
+    <div>
+        {{bio.desc}}
+    </div>
+    <div>
+        <p>Followers: {{bio.followers}}</p>
+    </div>
+    <hr>
+    <!--TODO To fill with React elements that can be edited-->
+    <!--When clicked insert textarea then submission goes to /posts/id-->
+    <div id="comments">
+        
+    </div>
+</div>
+
+
+<div id="following_">
+    <!--TODO Write a function to dynamically create numbered pages-->
+    <!--Fetch to find out how many pages when followers initially clicked-->
+</div>
+
+<div id="pages">
+  <nav aria-label="Page navigation" id="groot">
+    
+  </nav>
+</div>
+
+<script>
+  //Two tabs: Profile and Following
+  //Profile is a page which has a short desc and people they follow
+  $(window).on("load", function() {
+    var bioname = "{{bio.name}}"
+    profile(bioname)
+        })
+  
+  //Click the Profile div
+  $("#profile").on("click", function() {
+    var bioname = "{{bio.name}}"
+    $("#profile_").show();
+    $("#following_").hide();
+    $("#pages").hide();
+    profile(bioname)
+  });
+  
+  //Click the Following div
+  $("#follow").on("click", function() { 
+    var bioname = "{{bio.name}}"
+    $("#profile_").hide();
+    $("#following_").show();
+    $("#pages").show();
+    following(bioname, undefined)
+  })
+
+  var username = "{{user.username}}"
+  
+</script>
+
+{% block script %}
+<!-- In production change to JSX Preprocessor -->
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> 
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel" src="{% static 'network/profile.js' %}"></script>
+
+{% endblock %}
+{% endblock %}

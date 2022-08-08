@@ -1,0 +1,23 @@
+textarea {
+  min-height: 400px;
+}
+
+.unread {
+  background-color: #9b1414;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.unread a, .unread a:hover {
+  text-decoration: none;
+  color: #9b1414;
+}
+
+.read {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  background-color: #53e272 !important;
+}
+
+/*# sourceMappingURL=styles.css.map */

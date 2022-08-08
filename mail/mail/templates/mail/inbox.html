@@ -1,0 +1,46 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>{{ request.user.email }}</h2>
+
+    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
+    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
+    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
+    <hr>
+
+    <div id="email">
+        
+    </div>
+    <div id="emails-view">
+    </div>
+
+    <div id="compose-view">
+        <h3>New Email</h3>
+        <form id="compose-form" onsubmit="return false">
+            <div class="form-group">
+                From: <input disabled class="form-control" value="{{ request.user.email }}">
+            </div>
+            <div class="form-group">
+                To: <input id="compose-recipients" name="recipients" class="form-control">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="compose-subject" name="subject" placeholder="Subject">
+            </div>
+            <textarea class="form-control" id="compose-body" name="body" placeholder="Body"></textarea>
+            <input id="submission" type="submit" class="btn btn-primary"/>
+        </form>
+    </div>
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> 
+{% endblock %}
+
+{% block script %}
+    <!-- In production change to JSX Preprocessor -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel" src="{% static 'mail/inbox.js' %}"></script>
+     <!-- Look at Files to determine what data to load into mail-->
+{% endblock %}

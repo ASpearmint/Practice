@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+        <script src="{{static_url}}/static/jquery.js"></script>
+    </head>
+    <body>
+        <div class="row">
+            <div class="sidebar col-lg-2 col-md-3">
+                <h2>Wiki</h2>
+                <form>
+                    <input autocomplete="off" class="search" id="search" type="search" name="q" placeholder="Search Encyclopedia">
+                    <li id="filled" hidden>Documents</li>
+                </form>
+                <div>
+                    <a href="{% url 'index' %}">Home</a>
+                </div>
+                <div>
+                    <a href="/create_page">Create New Page</a>
+                </div>
+                <div>
+                    <a href="{% url 'edit_page' %}">Edit Page</a>
+                </div>
+                <div>
+                    <a href="/random_page">Random Page</a>
+                </div>
+                {% block nav %}
+                {% endblock %}
+            </div>
+            <div class="main col-lg-10 col-md-9">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </body>
+    <script>
+        
+        $("div").on("click", () => {
+            $("#filled").attr("hidden", true);
+        });
+
+        $(".search").on("input", async function() {
+            let input = $("#search").val();
+            let response = await fetch('/search?q=' + input);
+            let items = await response.json();
+            if (items != null) {
+                $("#filled").attr("hidden", false)
+            }
+            items = items["items"];
+            let html = '';
+            for (let entry of items) {
+                html += '<li> <a href=/wiki/' + entry + '>' + entry + '</a></li>';
+            };
+            
+            $("#filled").html(html);
+            
+        });
+
+
+        
+    </script>
+</html>

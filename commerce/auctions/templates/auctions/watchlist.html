@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Watchlist</h2>
+    <hr>
+
+        {% for item in watchlist %}
+        <div>
+           <h3>{{item.watchlist.name}}</h3> 
+            Price: {{item.watchlist.price}}
+            <a href="/category/{{item.watchlist.category}}">Category: {{item.watchlist.category}}</a>
+            Description: {{item.watchlist.desc}}
+        </div>
+        <div>
+            Photo: <img src="{{item.watchlist.photo}}"></img> 
+            <button class="dark_blue"><a class="no_decoration" href="/listing/{{item.watchlist.id}}">Go to page or link</a></button>
+            <button class="dark_blue" id="{{item.watchlist.id}}" ><a class="no_decoration" href="/addwatch/{{item.watchlist.id}}"> Add to Watchlist </a></button>
+        </div>
+
+        <script>
+            $("#{{item.watchlist.id}}}").on("click", function(){
+                $(this).toggleClass('dark_blue');
+    
+            });
+    
+    
+        </script>
+        {% empty %} 
+        <p> Add something to the watchlist! </p>
+        {% endfor %}
+        
+   
+{% endblock %}

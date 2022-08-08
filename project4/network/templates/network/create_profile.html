@@ -1,0 +1,35 @@
+{% extends "network/layout.html" %} 
+{% load static %}
+
+{% block body %}
+<h2>Create a Profile</h2>
+<form id="form_create_prof" onsubmit="return false;" method="POST">
+    {% csrf_token %}
+    <label>Profile Description:</label>
+    <textarea class="form-control" placeholder="desc" name="desc" id="desc"> </textarea>
+    <button type="submit" id="submit-create-profile">Submit</button>
+</form> 
+
+
+{% block script %}
+<!-- In production change to JSX Preprocessor -->
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> 
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="module" src="{% static 'network/profile.js' %}"></script>
+
+<script>
+    
+    $("#submit-create-profile").on("click", ()=>{
+        let response = $.post("/create", $('#form_create_prof').serialize(), () => {
+            if (response.json().response == true) {
+                let name = "{{user.username}}"
+                window.location.href = `/profile/${name}`
+            }
+        });
+    
+    })
+</script>
+
+{% endblock %}
+{% endblock %}
